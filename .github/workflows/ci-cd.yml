@@ -1,0 +1,27 @@
+name: ci-cd 
+
+run-name: JavaBuild-by-${{ github.actor}}
+
+on: 
+    workflow_dispatch:
+        inputs:
+            environments:
+                description: To deploy for env
+                type: environment
+                required: true
+            deploy:
+                description: deploy 
+                type: boolean
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+
+            - name: setupJava
+              uses: actions/setup-java@v4
+              with:
+                distribution: 'temurin'
+                java-version: '17'
+                
